@@ -1,0 +1,37 @@
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no router eigrp
+% Incomplete command.
+Router(config)#no router eigrp 1
+Router(config)#exit
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#show ip protocol
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#router ospf 1
+Router(config-router)#network 10.0.0.0 0.255.255.255 area 1
+Router(config-router)#network 20.0.0.0 0.255.255.255 area 1
+Router(config-router)#network 50.0.0.0 0.255.255.255 area 1
+Router(config-router)#exi
+Router(config)#exit
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#show ip protocol
+
+Routing Protocol is "ospf 1"
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Router ID 50.0.0.1
+  Number of areas in this router is 1. 1 normal 0 stub 0 nssa
+  Maximum path: 4
+  Routing for Networks:
+    10.0.0.0 0.255.255.255 area 1
+    20.0.0.0 0.255.255.255 area 1
+    50.0.0.0 0.255.255.255 area 1
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    50.0.0.1             110      00:00:11
+  Distance: (default is 110)

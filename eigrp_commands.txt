@@ -1,0 +1,65 @@
+Router>enable
+Router#show ip protocol
+Routing Protocol is "rip"
+Sending updates every 30 seconds, next due in 1 seconds
+Invalid after 180 seconds, hold down 180, flushed after 240
+Outgoing update filter list for all interfaces is not set
+Incoming update filter list for all interfaces is not set
+Redistributing: rip
+Default version control: send version 2, receive 2
+  Interface             Send  Recv  Triggered RIP  Key-chain
+  GigabitEthernet0/0/0  2     2     
+  GigabitEthernet0/0/1  2     2     
+  Serial0/1/0           2     2     
+Automatic network summarization is in effect
+Maximum path: 4
+Routing for Networks:
+	30.0.0.0
+	40.0.0.0
+	50.0.0.0
+Passive Interface(s):
+Routing Information Sources:
+	Gateway         Distance      Last Update
+	50.0.0.1             120      00:04:11
+	30.0.0.2             120      00:02:28
+Distance: (default is 120)
+Router#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Router(config)#no router rip
+Router(config)#router eigrp 1
+Router(config-router)#network 30.0.0.0
+Router(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 30.0.0.2 (GigabitEthernet0/0/1) is up: new adjacency
+
+Router(config-router)#network 50.0.0.0
+Router(config-router)#
+%DUAL-5-NBRCHANGE: IP-EIGRP 1: Neighbor 50.0.0.1 (Serial0/1/0) is up: new adjacency
+
+Router(config-router)#network 40.0.0.0
+Router(config-router)#exit
+Router(config)#exit
+Router#
+%SYS-5-CONFIG_I: Configured from console by console
+
+Router#show ip protocol
+
+Routing Protocol is "eigrp  1 " 
+  Outgoing update filter list for all interfaces is not set 
+  Incoming update filter list for all interfaces is not set 
+  Default networks flagged in outgoing updates  
+  Default networks accepted from incoming updates 
+  EIGRP metric weight K1=1, K2=0, K3=1, K4=0, K5=0
+  EIGRP maximum hopcount 100
+  EIGRP maximum metric variance 1
+Redistributing: eigrp 1
+  Automatic network summarization is not in effect  
+  Maximum path: 4
+  Routing for Networks:  
+     30.0.0.0
+     50.0.0.0
+     40.0.0.0
+  Routing Information Sources:  
+    Gateway         Distance      Last Update 
+    30.0.0.2        90            774326     
+    50.0.0.1        90            785806     
+  Distance: internal 90 external 170
